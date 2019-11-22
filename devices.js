@@ -4910,6 +4910,11 @@ const devices = [
         vendor: 'Iluminize',
         description: 'HV LED dimmer',
         extend: generic.light_onoff_brightness,
+        configure: async (device, coordinatorEndpoint) => {
+            const endpoint = device.getEndpoint(1);
+            await bind(endpoint, coordinatorEndpoint, ['genOnOff']);
+            await configureReporting.onOff(endpoint);
+        },
     },
 
     // Anchor
